@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.sidebar {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+.content {
+  background-color: #ffffff;
+  padding: 20px;
+  min-height: 90vh;
+}
+.about-page {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+.contact-page {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bg-custom {
+  background-color: black;
+}
+.zoom-hover:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.shadow-pop {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.shadow-pop:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-5px);
+}
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+.img-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.img-container:hover .img-overlay {
+  opacity: 1;
+}
+
+.sidebar {
+  min-height: 100vh;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Card Styling */
+.tour-package-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tour-package-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-color: #28a745;
+}
+
+.tour-package-card .card-body {
+  padding: 1.5rem;
+}
+
+.tour-package-card .card-title {
+  color: #333;
+}
+
+.tour-package-card ul {
+  padding-left: 20px;
+}
+
+.tour-package-card h6 {
+  font-size: 1.1rem;
+}
