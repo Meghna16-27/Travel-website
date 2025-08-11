@@ -1,59 +1,41 @@
-Tour & Travel Website — Globetrotter (MERN Stack)
-A full-featured Tour & Travel web application built with the MERN stack. Users can browse destinations, make bookings, contact the agency, and authenticate. Admins can manage users, destinations, bookings and messages. Payments are simulated using OTP generation.
+# Tour & Travel Website -Globetrotter (MERN Stack)
+This is a full-featured Tour & Travel web application built using the MERN Stack. It allows users to explore destinations, make bookings, and contact the travel agency. Admins can manage users, destinations, bookings, and inquiries via an admin panel and payment through OTP generation.
 
-Table of Contents
-Project Overview
+# Features
+1. Explore beautiful travel destinations with images and descriptions
 
-Features
+2. Book tours with duration and price
 
-Tech Stack
+3. Contact form with backend support
 
-Getting Started / Installation
+4. User registration, login & authentication
 
-Environment Variables
+5. Admin dashboard for managing:
 
-Run Locally
+    Users
+    Destinations
+    Bookings
+    Contact messages
+   
+ 6.Payment only using OTP. 
 
-API Endpoints (high level)
+# Tech Stack
+Frontend: React, Bootstrap, Axios, React Router
 
-Admin Panel
+Backend: Node.js, Express.js
 
-OTP Payment (note)
+Database: MongoDB
 
-Future Scope
+Authentication: JWT, LocalStorage
 
-Contributing
+Styling: Custom CSS + Bootstrap
 
-License
+# Future Scope
+Google Maps Integration to show destination locations
 
-Project Overview
-Globetrotter is a MERN (MongoDB, Express, React, Node) application for a travel agency. It provides a user-facing site to explore destinations and book tours, and an admin dashboard for managing data. Authentication is handled via JWT and tokens are stored in localStorage.
+1. Progressive Web App (PWA) support for mobile-friendly experience
 
-Features
-Browse beautiful travel destinations with images & descriptions
+2.  Upgrade online Payment Integration for tour booking
 
-Book tours (duration, price, date selection)
-
-Contact form with backend storage for inquiries
-
-User registration, login and authentication (JWT)
-
-Admin dashboard to manage:
-
-Users
-
-Destinations
-
-Bookings
-
-Contact messages
-
-Payment simulated by OTP generation (server-side OTP flow)
-
-Tech Stack
-Frontend: React, React Router, Axios, Bootstrap, custom CSS
-
-Backend: Node.js, Express
-
-Database: MongoDB (Atlas or local)
+3. Email & SMS notifications for booking confirmations and updates
 
