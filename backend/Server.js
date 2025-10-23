@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -6,17 +7,19 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const SECRET_KEY = "meghna_paul";
+const SECRET_KEY = process.env.SECRET_KEY || "default_secret";
+
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/meghna", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
+
 .then(() => console.log(" MongoDB Connected"))
 .catch(err => console.error("MongoDB Connection Failed", err));
 
