@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { Carousel,CarouselContent,CarouselItem } from "./Carousel";
+import AutoScroll from "embla-carousel-auto-scroll";
 const cityDistances = {
   "paris": 2220,
   "tokyo": 1510,
@@ -33,6 +34,7 @@ function DestinationDetails() {
   }, [id]);
 
   if (!destination) return <div className="text-center py-5">Loading...</div>;
+  const galleryImages = [destination.img2, destination.img3, destination.img4].filter(Boolean);
 
   return (
     <div className="container py-5">
@@ -59,21 +61,46 @@ function DestinationDetails() {
       </div>
 
       {/* Gallery */}
-      <section className="py-4">
-        <h4 className="fw-semibold mb-4">Gallery</h4>
-        <div className="row g-4">
-          {[destination.img2, destination.img3, destination.img4].map((img, index) => (
-            <div key={index} className="col-12 col-sm-6 col-md-4 shadow-pop">
-              <img
-                src={img}
-                alt={`Place ${index + 1}`}
-                className="img-fluid rounded shadow w-100"
-                style={{ objectFit: 'cover', height: '250px' }}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Gallery Section - Smooth Automatic Motion */}
+<section className="py-4 overflow-hidden">
+  <h4 className="fw-semibold mb-4">Gallery</h4>
+  <Carousel
+    opts={{ 
+      loop: true,
+      dragFree: true 
+    }}
+    plugins={[
+      AutoScroll({
+        speed: 1.2,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      })
+    ]}
+    className="w-100"
+  >
+    <CarouselContent className="-ml-4">
+      {/* Duplicate the images array [...galleryImages, ...galleryImages] so there are 6 items to scroll */}
+      {[...galleryImages, ...galleryImages].map((img, index) => (
+        <CarouselItem 
+          key={index} 
+          className="pl-4 shadow-pop"
+          style={{ 
+            flex: "0 0 33.333%", 
+            minWidth: "280px",
+           marginRight: "20px"
+          }}
+        >
+          <img
+            src={img}
+            alt={`Place ${index + 1}`}
+            className="img-fluid rounded shadow w-100"
+            style={{ objectFit: 'cover', height: '250px' }}
+          />
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+  </Carousel>
+</section>
 
       {/* Stay Experience */}
       <section className="py-5">
