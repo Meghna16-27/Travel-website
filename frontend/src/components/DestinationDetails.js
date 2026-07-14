@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Carousel,CarouselContent,CarouselItem } from "./Carousel";
+import { Carousel, CarouselContent, CarouselItem } from "./Carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
 const cityDistances = {
-  "paris": 2220,
-  "tokyo": 1510,
+  paris: 2220,
+  tokyo: 1510,
   "new york": 3160,
-  "sydney": 1990,
-  "switzerland": 1520,
-  "maldives": 1020,
-  "dubai": 1950,
-  "bali": 1940
+  sydney: 1990,
+  switzerland: 1520,
+  maldives: 1020,
+  dubai: 1950,
+  bali: 1940,
 };
 
 function DestinationDetails() {
@@ -21,7 +21,8 @@ function DestinationDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/destinations/${id}`)
+    axios
+      .get(`http://localhost:4000/destinations/${id}`)
       .then((res) => {
         const data = res.data;
         setDestination(data);
@@ -34,10 +35,14 @@ function DestinationDetails() {
   }, [id]);
 
   if (!destination) return <div className="text-center py-5">Loading...</div>;
-  const galleryImages = [destination.img2, destination.img3, destination.img4].filter(Boolean);
+  const galleryImages = [
+    destination.img2,
+    destination.img3,
+    destination.img4,
+  ].filter(Boolean);
 
   return (
-    <div className="container py-5">
+    <div className="container py-5 glass-card">
       <h2 className="mb-3 text-center fw-bold">{destination.title}</h2>
 
       <img
@@ -47,75 +52,103 @@ function DestinationDetails() {
         style={{ maxHeight: "400px", objectFit: "cover" }}
       />
 
-      <p className="lead">{destination.description || "No description available."}</p>
+      <p className="lead">
+        {destination.description || "No description available."}
+      </p>
 
       {/* Tour Highlights */}
       <div className="my-5">
-        <h4 className="fw-semibold mb-3">Tour Highlights</h4>
-        <ul className="list-unstyled">
-          <li>Scenic beauty and cultural heritage</li>
-          <li>Premium hotels & comfortable stays</li>
-          <li>Delicious local cuisine and curated food experiences</li>
-          <li>Guided city tours and local excursions</li>
-        </ul>
+        <h4 className="fw-semibold mb-4">Tour Highlights</h4>
+
+        <div className="row g-3">
+          <div className="col-md-3 col-sm-6">
+            <div className="highlight-box">
+              Scenic beauty and cultural heritage
+            </div>
+          </div>
+
+          <div className="col-md-3 col-sm-6">
+            <div className="highlight-box">
+              Premium hotels & comfortable stays
+            </div>
+          </div>
+
+          <div className="col-md-3 col-sm-6">
+            <div className="highlight-box">
+              Delicious local cuisine and curated food experiences
+            </div>
+          </div>
+
+          <div className="col-md-3 col-sm-6">
+            <div className="highlight-box">
+              Guided city tours and local excursions
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Gallery */}
       {/* Gallery Section - Smooth Automatic Motion */}
-<section className="py-4 overflow-hidden">
-  <h4 className="fw-semibold mb-4">Gallery</h4>
-  <Carousel
-    opts={{ 
-      loop: true,
-      dragFree: true 
-    }}
-    plugins={[
-      AutoScroll({
-        speed: 1.2,
-        stopOnInteraction: false,
-        stopOnMouseEnter: true,
-      })
-    ]}
-    className="w-100"
-  >
-    <CarouselContent className="-ml-4">
-      {/* Duplicate the images array [...galleryImages, ...galleryImages] so there are 6 items to scroll */}
-      {[...galleryImages, ...galleryImages].map((img, index) => (
-        <CarouselItem 
-          key={index} 
-          className="pl-4 shadow-pop"
-          style={{ 
-            flex: "0 0 33.333%", 
-            minWidth: "280px",
-           marginRight: "20px"
+      <section className="py-4 overflow-hidden">
+        <h4 className="fw-semibold mb-4">Gallery</h4>
+        <Carousel
+          opts={{
+            loop: true,
+            dragFree: true,
           }}
+          plugins={[
+            AutoScroll({
+              speed: 1.2,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          className="w-100"
         >
-          <img
-            src={img}
-            alt={`Place ${index + 1}`}
-            className="img-fluid rounded shadow w-100"
-            style={{ objectFit: 'cover', height: '250px' }}
-          />
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  </Carousel>
-</section>
+          <CarouselContent className="-ml-4">
+            {/* Duplicate the images array [...galleryImages, ...galleryImages] so there are 6 items to scroll */}
+            {[...galleryImages, ...galleryImages].map((img, index) => (
+              <CarouselItem
+                key={index}
+                className="pl-4 shadow-pop"
+                style={{
+                  flex: "0 0 33.333%",
+                  minWidth: "280px",
+                  marginRight: "20px",
+                }}
+              >
+                <img
+                  src={img}
+                  alt={`Place ${index + 1}`}
+                  className="img-fluid rounded shadow w-100"
+                  style={{ objectFit: "cover", height: "250px" }}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </section>
 
       {/* Stay Experience */}
       <section className="py-5">
         <h4 className="fw-semibold mb-4">Stay & Food Experience</h4>
         <div className="row g-4">
           <div className="col-sm-6 col-md-4">
-            <img src={destination.img6} alt="Stay" className="img-fluid rounded shadow" />
+            <img
+              src={destination.img6}
+              alt="Stay"
+              className="img-fluid rounded shadow"
+            />
           </div>
           <div className="col-md-6">
             <p className="mt-2">
-              Our tour packages include comfortable and carefully selected hotels to suit every
-              traveler's needs, from budget-friendly options to luxurious resorts. Each hotel
-              offers modern amenities like free Wi-Fi, spacious rooms, in-house dining, and
-              excellent customer service. Located close to major attractions, these stays ensure
-              convenience and relaxation, making your travel experience smooth and memorable.
+              Our tour packages include comfortable and carefully selected
+              hotels to suit every traveler's needs, from budget-friendly
+              options to luxurious resorts. Each hotel offers modern amenities
+              like free Wi-Fi, spacious rooms, in-house dining, and excellent
+              customer service. Located close to major attractions, these stays
+              ensure convenience and relaxation, making your travel experience
+              smooth and memorable.
             </p>
           </div>
         </div>
@@ -126,12 +159,13 @@ function DestinationDetails() {
         <div className="row g-4">
           <div className="col-md-6">
             <p className="mt-2">
-              Our tour packages offer exceptional food facilities designed to cater to every
-              traveler’s taste and comfort. Guests can enjoy a variety of local and international
-              cuisines, with many accommodations providing complimentary breakfast, à la carte
-              dining, and 24/7 room service. Whether you're craving authentic local flavors or
-              comforting familiar meals, our partner hotels ensure a delightful culinary experience
-              throughout your stay.
+              Our tour packages offer exceptional food facilities designed to
+              cater to every traveler’s taste and comfort. Guests can enjoy a
+              variety of local and international cuisines, with many
+              accommodations providing complimentary breakfast, à la carte
+              dining, and 24/7 room service. Whether you're craving authentic
+              local flavors or comforting familiar meals, our partner hotels
+              ensure a delightful culinary experience throughout your stay.
             </p>
           </div>
           <div className="col-md-6">
@@ -153,24 +187,35 @@ function DestinationDetails() {
               name: "Budget Explorer",
               duration: "3 Days / 2 Nights",
               price: cost ? cost * 1.2 : null,
-              features: ["Standard hotel", "All meals included", "Guided local tour"],
+              features: [
+                "Standard hotel",
+                "All meals included",
+                "Guided local tour",
+              ],
             },
             {
               name: "Classic Vacation",
               duration: "5 Days / 4 Nights",
               price: cost ? cost * 1.5 : null,
-              features: ["3-star hotel", "All meals included", "City excursions"],
+              features: [
+                "3-star hotel",
+                "All meals included",
+                "City excursions",
+              ],
             },
             {
               name: "Luxury Experience",
               duration: "7 Days / 6 Nights",
               price: cost ? cost * 2.0 : null,
               features: ["5-star resort", "Private tours", "Gourmet dining"],
-            }
+            },
           ].map((pkg, index) => (
             <div key={index} className="col-md-4">
               <div className="card shadow h-100 tour-package-card">
-                <div className="card-body" style={{ backgroundColor: "#f4fff7" }}>
+                <div
+                  className="card-body"
+                  style={{ backgroundColor: "#f4fff7" }}
+                >
                   <h5 className="card-title fw-bold">{pkg.name}</h5>
                   <p className="text-muted">{pkg.duration}</p>
                   <ul className="mb-3">
@@ -191,8 +236,8 @@ function DestinationDetails() {
                           title: `${destination.title} - ${pkg.name}`,
                           img: destination.img1,
                           description: `${pkg.duration} | ${pkg.features.join(", ")}`,
-                          cost: Math.round(pkg.price)
-                        }
+                          cost: Math.round(pkg.price),
+                        },
                       })
                     }
                   >
