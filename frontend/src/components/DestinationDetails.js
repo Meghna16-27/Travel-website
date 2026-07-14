@@ -41,49 +41,60 @@ function DestinationDetails() {
     destination.img4,
   ].filter(Boolean);
 
+  const highlights = destination.highlights || [
+    {
+      title: "Scenic Beauty",
+      text: "Experience breathtaking landscapes, iconic landmarks, and unforgettable views.",
+    },
+    {
+      title: "Comfortable Stays",
+      text: "Enjoy premium hotels and cozy accommodations chosen for convenience and comfort.",
+    },
+    {
+      title: "Local Flavors",
+      text: "Savor curated food experiences with authentic local cuisine and gourmet touches.",
+    },
+    {
+      title: "Guided Adventures",
+      text: "Travel with expert guides through the best attractions and hidden gems.",
+    },
+  ];
+
   return (
     <div className="container py-5 glass-card">
-      <h2 className="mb-3 text-center fw-bold">{destination.title}</h2>
-
-      <img
-        src={destination.img1}
-        alt={destination.title}
-        className="img-fluid rounded shadow mb-4 w-100"
-        style={{ maxHeight: "400px", objectFit: "cover" }}
-      />
-
-      <p className="lead">
-        {destination.description || "No description available."}
-      </p>
+      <div className="destination-hero mb-4">
+        <div className="destination-hero-content">
+          <span className="destination-badge">Check Packages</span>
+          <h2 className="mb-3 fw-bold">{destination.title}</h2>
+          <p className="lead mb-0">
+            {destination.description || "No description available."}
+          </p>
+        </div>
+        <img
+          src={destination.img1}
+          alt={destination.title}
+          className="destination-hero-image"
+        />
+      </div>
 
       {/* Tour Highlights */}
       <div className="my-5">
         <h4 className="fw-semibold mb-4">Tour Highlights</h4>
+        <p className="text-muted mb-4">
+          Every itinerary is designed to make your journey smooth, memorable, and full of discovery.
+        </p>
 
         <div className="row g-3">
-          <div className="col-md-3 col-sm-6">
-            <div className="highlight-box">
-              Scenic beauty and cultural heritage
+          {highlights.map((item, index) => (
+            <div key={index} className="col-lg-3 col-md-6 col-sm-6">
+              <div className="highlight-box">
+                <div>
+                  <h6 className="mb-2">{item.title}</h6>
+                  <p>{item.text}</p>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="col-md-3 col-sm-6">
-            <div className="highlight-box">
-              Premium hotels & comfortable stays
-            </div>
-          </div>
-
-          <div className="col-md-3 col-sm-6">
-            <div className="highlight-box">
-              Delicious local cuisine and curated food experiences
-            </div>
-          </div>
-
-          <div className="col-md-3 col-sm-6">
-            <div className="highlight-box">
-              Guided city tours and local excursions
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
