@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Carousel, CarouselContent, CarouselItem } from "./Carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
+import { useRef } from "react";
 const cityDistances = {
   paris: 2220,
   tokyo: 1510,
@@ -19,6 +20,7 @@ function DestinationDetails() {
   const [destination, setDestination] = useState(null);
   const [cost, setCost] = useState(null);
   const navigate = useNavigate();
+  const packageref= useRef(null);
 
   useEffect(() => {
     axios
@@ -35,11 +37,10 @@ function DestinationDetails() {
   }, [id]);
 
   if (!destination) return <div className="text-center py-5">Loading...</div>;
-  const galleryImages = [
-    destination.img2,
-    destination.img3,
-    destination.img4,
-  ].filter(Boolean);
+  const galleryImages = [destination.img2,destination.img3,destination.img4,destination.img6,destination.img7].filter(Boolean);
+
+
+  
 
   const highlights = destination.highlights || [
     {
@@ -64,7 +65,16 @@ function DestinationDetails() {
     <div className="container py-5 glass-card">
       <div className="destination-hero mb-4">
         <div className="destination-hero-content">
-          <span className="destination-badge">Check Packages</span>
+          {/* <span className="destination-badge">Check Packages</span> */}
+          <button className="destination-badge"
+          onClick={()=>
+            packageref.current?.scrollIntoView({
+              behavior:"smooth",
+              block:"start",
+            })
+          }>
+            Check Packages
+          </button>
           <h2 className="mb-3 fw-bold">{destination.title}</h2>
           <p className="lead mb-0">
             {destination.description || "No description available."}
@@ -99,7 +109,6 @@ function DestinationDetails() {
       </div>
 
       {/* Gallery */}
-      {/* Gallery Section - Smooth Automatic Motion */}
       <section className="py-4 overflow-hidden">
         <h4 className="fw-semibold mb-4">Gallery</h4>
         <Carousel
@@ -140,57 +149,10 @@ function DestinationDetails() {
         </Carousel>
       </section>
 
-      {/* Stay Experience */}
-      <section className="py-5">
-        <h4 className="fw-semibold mb-4">Stay & Food Experience</h4>
-        <div className="row g-4">
-          <div className="col-sm-6 col-md-4">
-            <img
-              src={destination.img6}
-              alt="Stay"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-          <div className="col-md-6">
-            <p className="mt-2">
-              Our tour packages include comfortable and carefully selected
-              hotels to suit every traveler's needs, from budget-friendly
-              options to luxurious resorts. Each hotel offers modern amenities
-              like free Wi-Fi, spacious rooms, in-house dining, and excellent
-              customer service. Located close to major attractions, these stays
-              ensure convenience and relaxation, making your travel experience
-              smooth and memorable.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Food Experience */}
-      <section className="py-5">
-        <div className="row g-4">
-          <div className="col-md-6">
-            <p className="mt-2">
-              Our tour packages offer exceptional food facilities designed to
-              cater to every traveler’s taste and comfort. Guests can enjoy a
-              variety of local and international cuisines, with many
-              accommodations providing complimentary breakfast, à la carte
-              dining, and 24/7 room service. Whether you're craving authentic
-              local flavors or comforting familiar meals, our partner hotels
-              ensure a delightful culinary experience throughout your stay.
-            </p>
-          </div>
-          <div className="col-md-6">
-            <img
-              src="https://media.istockphoto.com/id/1158623408/photo/indian-hindu-veg-thali-food-platter-selective-focus.webp?a=1&b=1&s=612x612&w=0&k=20&c=WOCrpfQJRlyY9W84K4iAaIfJVCWbIs_UroFYKK9y1Qg="
-              alt="Food"
-              className="img-fluid rounded shadow"
-            />
-          </div>
-        </div>
-      </section>
+     
 
       {/* Tour Packages Section */}
-      <section className="py-5">
+      <section className="py-5" ref={packageref}>
         <h4 className="fw-semibold mb-4">Our Packages</h4>
         <div className="row g-4">
           {[
