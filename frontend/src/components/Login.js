@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -18,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/login", user);
+      const response = await axios.post(`${API}/login`, user);
       console.log("Login Response:", response.data);
 
       // Save values to localStorage

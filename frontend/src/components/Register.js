@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
@@ -18,7 +19,7 @@ const navigate= useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault(); //for not submitting empty form
         try {
-            const response = await axios.post("http://localhost:4000/register", user);
+            const response = await axios.post(`${API}/register`, user);
             alert(response.data.message);
               navigate('/login');
         } catch(error) {

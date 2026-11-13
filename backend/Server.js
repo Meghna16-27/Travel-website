@@ -6,17 +6,16 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const SECRET_KEY = "meghna_paul";
+const SECRET_KEY = process.env.JWT_SECRET || "dev-only-secret";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/meghna", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/meghna")
 .then(() => console.log(" MongoDB Connected"))
 .catch(err => console.error("MongoDB Connection Failed", err));
 
@@ -107,7 +106,7 @@ app.post("/login", async (req, res) => {
 
   try {
     // Admin check
-    if (email === 'admin123@gmail.com' && password === 'admin123') {
+    if (ADMIN_EMAIL && ADMIN_PASSWORD && email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       return res.status(200).json({
         message: "Admin login successful!",
         token: "admin-token",

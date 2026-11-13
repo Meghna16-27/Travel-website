@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -14,7 +15,7 @@ const Index = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/destinations")
+      .get(`${API}/destinations`)
       .then((res) => setDestinations(res.data))
       .catch((err) => console.error("Error fetching destinations", err));
   }, []);
@@ -25,7 +26,7 @@ const Index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4000/contacts", formData);
+      const res = await axios.post(`${API}/contacts`, formData);
       if (res.data.success) {
         setStatus("Message sent successfully!");
         setFormData({ name: "", email: "", phone: "", message: "" });

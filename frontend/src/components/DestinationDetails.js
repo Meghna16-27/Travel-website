@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,7 +25,7 @@ function DestinationDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/destinations/${id}`)
+      .get(`${API}/destinations/${id}`)
       .then((res) => {
         const data = res.data;
         setDestination(data);

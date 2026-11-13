@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
@@ -71,7 +72,7 @@ const Booknow = () => {
         cost: totalCost
       };
 
-      await axios.post("http://localhost:4000/bookings", bookingData);
+      await axios.post(`${API}/bookings`, bookingData);
       alert("Booking successful!");
       navigate("/payment");
     } catch (err) {

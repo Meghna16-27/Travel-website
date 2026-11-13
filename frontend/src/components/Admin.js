@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -11,7 +12,7 @@ function Admin() {
 
   useEffect(() => {
     if (activeSection === 'users') {
-      axios.get("http://localhost:4000/registers")
+      axios.get(`${API}/registers`)
         .then(response => setUsers(response.data))
         .catch(error => console.error("Error fetching users", error));
     }
@@ -23,7 +24,7 @@ function Admin() {
 
   const fetchTours = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/destinations");
+      const res = await axios.get(`${API}/destinations`);
       setTours(res.data);
     } catch (err) {
       console.error("Error fetching tours", err);
@@ -32,7 +33,7 @@ function Admin() {
 
   const fetchContacts = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/contacts");
+      const res = await axios.get(`${API}/contacts`);
       setContacts(res.data);
     } catch (err) {
       console.error("Error fetching contacts", err);
@@ -41,7 +42,7 @@ function Admin() {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/bookings");
+      const res = await axios.get(`${API}/bookings`);
       setBookings(res.data);
     } catch (err) {
       console.error("Error fetching bookings", err);
@@ -51,7 +52,7 @@ function Admin() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this tour?")) {
       try {
-        await axios.delete(`http://localhost:4000/destinations/${id}`);
+        await axios.delete(`${API}/destinations/${id}`);
         setTours(prev => prev.filter(t => t._id !== id));
       } catch (error) {
         console.error("Error deleting tour:", error);
@@ -62,7 +63,7 @@ function Admin() {
   const handleDeleteBooking = async (id) => {
     if (window.confirm("Are you sure you want to delete this booking?")) {
       try {
-        await axios.delete(`http://localhost:4000/bookings/${id}`);
+        await axios.delete(`${API}/bookings/${id}`);
         setBookings(prev => prev.filter(b => b._id !== id));
       } catch (error) {
         console.error("Error deleting booking:", error);

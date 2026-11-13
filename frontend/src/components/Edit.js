@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -17,7 +18,7 @@ function Edit() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:4000/destinations/${id}`)
+      fetch(`${API}/destinations/${id}`)
         .then(res => res.json())
         .then(data => setFormData(data))
         .catch(err => console.error("Fetch error:", err));
@@ -31,7 +32,7 @@ function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (id) {
-      await fetch(`http://localhost:4000/destinations/${id}`, {
+      await fetch(`${API}/destinations/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

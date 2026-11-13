@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ const Add = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/destinations", user);
+            const response = await axios.post(`${API}/destinations`, user);
             alert(response.data.message || "Submitted successfully!");
            setUser({ title: "", img1: "", img2: "", img3: "", img4: "",img6:"", description: "" });
 

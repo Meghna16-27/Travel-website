@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -16,7 +17,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/bookings?email=${email}`);
+        const res = await axios.get(`${API}/bookings?email=${email}`);
         const bookings = res.data;
         if (bookings.length > 0) {
           const latest = bookings[bookings.length - 1];

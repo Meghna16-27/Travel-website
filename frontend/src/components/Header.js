@@ -1,3 +1,4 @@
+import { API } from "../config";
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,7 +23,7 @@ const Header = () => {
 
   // Fetch all destinations for search
   useEffect(() => {
-    axios.get("http://localhost:4000/destinations")
+    axios.get(`${API}/destinations`)
       .then((res) => setDestinations(res.data))
       .catch((err) => console.error("Failed to load destinations", err));
   }, []);
@@ -43,7 +44,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       if (email) {
-        await axios.post("http://localhost:4000/logout", { email });
+        await axios.post(`${API}/logout`, { email });
       }
     } catch (error) {
       console.error("Logout API failed:", error);
