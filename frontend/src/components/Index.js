@@ -12,12 +12,14 @@ const Index = () => {
     message: ""
   });
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`${API}/destinations`)
       .then((res) => setDestinations(res.data))
-      .catch((err) => console.error("Error fetching destinations", err));
+      .catch((err) => console.error("Error fetching destinations", err))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleChange = (e) =>
@@ -67,6 +69,11 @@ const Index = () => {
 
           {/* Cards Section */}
           <section className="container py-5 mb-5">
+            {loading && (
+              <p className="text-center text-muted">
+                Loading destinations... the server may take up to a minute to wake up.
+              </p>
+            )}
             <div className="row" style={{ rowGap: "20px" }}>
               {destinations.map((destination) => (
                 <div key={destination._id} className="col-md-3">
