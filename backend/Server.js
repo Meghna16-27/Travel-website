@@ -12,7 +12,21 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
+// Allowed browser origins: CLIENT_URL (comma-separated list) plus this project's Vercel preview URLs
+const allowedOrigins = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((o) => o.trim().replace(/\/$/, ""))
+  .filter(Boolean);
+const vercelPreview = /^https:\/\/travel-website[a-z0-9-]*\.vercel\.app$/;
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes("*")) return callback(null, true);
+      if (allowedOrigins.includes(origin) || vercelPreview.test(origin)) return callback(null, true);
+      return callback(null, false);
+    },
+  })
+);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/meghna")
