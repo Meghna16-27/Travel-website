@@ -13,6 +13,7 @@ const Index = () => {
   });
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
     axios
@@ -21,6 +22,17 @@ const Index = () => {
       .catch((err) => console.error("Error fetching destinations", err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Hero slideshow: rotate through the destination photos
+  const heroSlides = destinations.slice(0, 5);
+  useEffect(() => {
+    if (heroSlides.length < 2) return undefined;
+    const timer = setInterval(
+      () => setSlide((n) => (n + 1) % heroSlides.length),
+      5000
+    );
+    return () => clearInterval(timer);
+  }, [heroSlides.length]);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -45,31 +57,58 @@ const Index = () => {
       <section id="home" className="container-fluid py-5">
         <main>
           {/* Banner Section */}
-          <section
-            className="position-relative text-center text-white d-flex align-items-center justify-content-center"
-            style={{
-              backgroundImage:
-                "url('https://www.relaxgetaways.com/uploads/img/best-time-to-visit-maldives-banner.jpg')",
-              backgroundColor: "#0a5163",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              minHeight: "300px",
-              height: "50vh",
-            }}
-          >
-            <div
-              className="position-absolute top-0 start-0 w-100 h-100"
-              style={{ background: "linear-gradient(135deg, rgba(4,38,44,0.75), rgba(12,100,120,0.55))" }}
-            ></div>
-            <div className="position-relative z-1 text-center px-3">
-              <h1 className="fw-bold display-4 d-none d-md-block">Welcome to Globetrotter</h1>
-              <h2 className="fw-bold d-block d-md-none">Welcome</h2>
-              <p className="fs-5">Welcome Tourist</p>
+          <section className="hero">
+            {heroSlides.map((d, i) => (
+              <div
+                key={d._id}
+                className={`hero-slide${i === slide ? " active" : ""}`}
+                style={{ backgroundImage: `url("${d.img1}")` }}
+                aria-hidden="true"
+              />
+            ))}
+            <div className="hero-overlay"></div>
+
+            <div className="hero-content">
+              <span className="hero-pill">Your next trip starts here</span>
+              <h1 className="hero-title">
+                Discover the world with <span>Globetrotter</span>
+              </h1>
+              <p className="hero-sub">
+                Handpicked destinations, easy booking and 24/7 support, so you can
+                focus on making memories.
+              </p>
+              <div className="hero-actions">
+                <a href="#destinations" className="btn btn-success btn-lg rounded-pill px-4">
+                  Explore destinations
+                </a>
+                <a href="#contact" className="btn btn-outline-light btn-lg rounded-pill px-4">
+                  Contact us
+                </a>
+              </div>
             </div>
+
+            {heroSlides.length > 0 && (
+              <div className="hero-footer">
+                <span className="hero-location">
+                  <i className="fa fa-map-marker"></i> {heroSlides[slide] && heroSlides[slide].title}
+                </span>
+                <div className="hero-dots">
+                  {heroSlides.map((d, i) => (
+                    <button
+                      key={d._id}
+                      type="button"
+                      aria-label={`Show ${d.title}`}
+                      className={i === slide ? "active" : ""}
+                      onClick={() => setSlide(i)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
 
           {/* Cards Section */}
-          <section className="container py-5 mb-5">
+          <section id="destinations" className="container py-5 mb-5">
             {loading && (
               <p className="text-center text-muted">
                 Loading destinations... the server may take up to a minute to wake up.
