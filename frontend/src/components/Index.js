@@ -50,6 +50,7 @@ const Index = () => {
             style={{
               backgroundImage:
                 "url('https://www.relaxgetaways.com/uploads/img/best-time-to-visit-maldives-banner.jpg')",
+              backgroundColor: "#0a5163",
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: "300px",
@@ -58,7 +59,7 @@ const Index = () => {
           >
             <div
               className="position-absolute top-0 start-0 w-100 h-100"
-              style={{ background: "rgba(0, 0, 0, 0.5)" }}
+              style={{ background: "linear-gradient(135deg, rgba(4,38,44,0.75), rgba(12,100,120,0.55))" }}
             ></div>
             <div className="position-relative z-1 text-center px-3">
               <h1 className="fw-bold display-4 d-none d-md-block">Welcome to Globetrotter</h1>

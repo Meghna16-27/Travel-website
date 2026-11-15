@@ -1,0 +1,165 @@
+/*
+ * Blue-green (teal) monochromatic theme.
+ * Loaded after Bootstrap, so it overrides Bootstrap's default colours.
+ * Change the palette here to re-colour the whole site.
+ */
+:root {
+  --c-950: #04262c; /* deepest navy-teal */
+  --c-900: #073b46;
+  --c-800: #0a5163;
+  --c-700: #0c6478; /* main blue */
+  --c-600: #0f7d8a;
+  --c-500: #12a094; /* main green */
+  --c-400: #3dbfae;
+  --c-300: #86d9cc;
+  --c-200: #bdebe4;
+  --c-100: #e0f5f2;
+  --c-50: #f1fbf9;
+  --ink: #0b2e35;
+  --ink-muted: #3f6670;
+}
+
+body {
+  background-color: var(--c-50);
+  color: var(--ink);
+}
+
+a { color: var(--c-700); }
+a:hover { color: var(--c-500); }
+
+
+/* ---------- Navbar ---------- */
+.bg-custom,
+.navbar.bg-custom {
+  background: linear-gradient(90deg, var(--c-950), var(--c-800)) !important;
+}
+.navbar-dark .navbar-nav .nav-link { color: var(--c-200); }
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active { color: #fff; }
+
+/* ---------- Buttons ---------- */
+.btn { transition: background-color .2s, border-color .2s, transform .2s; }
+
+.btn-primary {
+  background-color: var(--c-700);
+  border-color: var(--c-700);
+  color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: var(--c-800) !important;
+  border-color: var(--c-800) !important;
+  color: #fff;
+}
+
+.btn-success {
+  background-color: var(--c-500);
+  border-color: var(--c-500);
+  color: #fff;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+  background-color: var(--c-600) !important;
+  border-color: var(--c-600) !important;
+  color: #fff;
+}
+
+.btn-warning {
+  background-color: var(--c-300);
+  border-color: var(--c-300);
+  color: var(--c-950);
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active,
+.show > .btn-warning.dropdown-toggle {
+  background-color: var(--c-400) !important;
+  border-color: var(--c-400) !important;
+  color: var(--c-950) !important;
+}
+
+.btn-danger {
+  background-color: var(--c-900);
+  border-color: var(--c-900);
+  color: #fff;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+  background-color: var(--c-950) !important;
+  border-color: var(--c-950) !important;
+  color: #fff;
+}
+
+.btn-light {
+  background-color: var(--c-100);
+  border-color: var(--c-100);
+  color: var(--c-900);
+}
+.btn-light:hover { background-color: var(--c-200); border-color: var(--c-200); color: var(--c-950); }
+
+.btn-outline-success {
+  color: var(--c-300);
+  border-color: var(--c-400);
+}
+.btn-outline-success:hover, .btn-outline-success:focus {
+  background-color: var(--c-500) !important;
+  border-color: var(--c-500) !important;
+  color: #fff !important;
+}
+
+/* ---------- Text / background utilities ---------- */
+.text-primary { color: var(--c-700) !important; }
+.text-success { color: var(--c-500) !important; }
+.bg-primary { background: linear-gradient(135deg, var(--c-800), var(--c-600)) !important; }
+.bg-light { background-color: var(--c-100) !important; }
+.bg-white { background-color: #fff !important; }
+
+/* ---------- Cards, forms, dropdowns ---------- */
+.card {
+  border: 1px solid var(--c-200);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+}
+.card-title { color: var(--c-900); }
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--c-500);
+  box-shadow: 0 0 0 .2rem rgba(18, 160, 148, .25);
+}
+.form-check-input:checked {
+  background-color: var(--c-500);
+  border-color: var(--c-500);
+}
+.dropdown-menu { border-color: var(--c-200); }
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: var(--c-100);
+  color: var(--c-900);
+}
+
+/* ---------- Tables (admin panel) ---------- */
+.table-dark, .table-dark > th, .table-dark > td {
+  --bs-table-bg: var(--c-800);
+  background-color: var(--c-800) !important;
+  border-color: var(--c-700) !important;
+  color: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: var(--c-100);
+  color: var(--ink);
+}
+.table-bordered > :not(caption) > * > * { border-color: var(--c-200); }
+
+/* ---------- Page sections ---------- */
+.about-page { background-color: var(--c-100); }
+.contact-page { background-color: #fff; border: 1px solid var(--c-200); }
+.sidebar { background-color: var(--c-100); }
+
+.alert-success {
+  background-color: var(--c-100);
+  border-color: var(--c-300);
+  color: var(--c-900);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: linear-gradient(90deg, var(--c-950), var(--c-800)) !important;
+  color: var(--c-200) !important;
+}
+
+::selection { background: var(--c-300); color: var(--c-950); }
